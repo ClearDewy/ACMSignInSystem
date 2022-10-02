@@ -12,13 +12,13 @@
         ref="ruleFormRef"
         label-width="50px"
         class="demo-ruleForm"
-        :size="formSize"
         status-icon
         @submit="ClockInOut"
         :rules="rules"
+        :model="ruleForm"
     >
-      <el-form-item label="学号" prop="stuNum">
-        <el-input v-model="rule" />
+      <el-form-item label="学号" prop="rule">
+        <el-input v-model="ruleForm.rule" />
       </el-form-item>
     </el-form>
     <template #footer>
@@ -33,21 +33,26 @@
 </template>
 
 <script lang="ts" setup>
-import {addUser, Clockin} from "../serve/api"
+import {Clockin} from "../serve/api"
 import {alerterror, alertsuccess} from "../alert/alert";
-import {ref} from "vue"
+import {reactive, ref} from "vue"
 import catuicpc from "../assets/katuicpc.jpg"
 import {Location,} from '@element-plus/icons-vue'
 import {FormInstance, FormRules} from "element-plus";
 import { useRoute } from 'vue-router'
 const isLoading=ref(false)
 const dialogVisible=ref(false)
-const rule=ref('')
+const ruleForm = reactive({
+  rule:''
+})
 
-const rules = {
-  stuNum: [
-    { required: true, message: '请输入学号', trigger: 'blur' }
-  ],}
+const rules = reactive<FormRules>({
+  rule: [
+    {
+      required: true, message: '请输入学号', trigger: 'blur' },
+    {min:10,max:12,message: '请输入正确的学号',trigger: 'blur'}
+  ],})
+
 const ruleFormRef = ref<FormInstance>()
 
 const myclockin=(value:string)=>{
@@ -62,19 +67,23 @@ const myclockin=(value:string)=>{
     }
   })
   isLoading.value=false
+  dialogVisible.value=false
 }
 
 const ClockInOut=async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid, fields) => {
     if (valid) {
-      myclockin(rule.value)
+      myclockin(ruleForm.rule)
     } else {
       if (fields)
         alerterror(fields.toString())
     }
   })
 }
+
+import UserView from './UserView.vue'
+UserView.r
 const stunum=ref('')
 const route = useRoute()
 document.onkeydown=(e)=>{
@@ -85,11 +94,13 @@ document.onkeydown=(e)=>{
       stunum.value=stunum.value.slice(-10)
     }
   }else if (e.key==="Enter"){
-    if (stunum.value.length>=10&&route.path!="/userview"){
+    if (stunum.value.length>=10){//&&route.path!="/userview"
       stunum.value=stunum.value.slice(-10)
       // console.log(stunum.value)
       myclockin(stunum.value)
     }
+  }else {
+    stunum.value=''
   }
 }
 </script>

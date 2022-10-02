@@ -2,8 +2,8 @@ import axios from 'axios'
 import formData from 'form-data'
 import {alerterror} from "../alert/alert"
 import { ref } from 'vue'
-// axios.defaults.baseURL="/spring"
-axios.defaults.baseURL="http://localhost:8080/api"
+axios.defaults.baseURL="/spring"
+
 
 const GET=(url:string)=>{
     return new Promise((resolve)=>{
