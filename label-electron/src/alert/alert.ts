@@ -13,6 +13,13 @@ export const alertsuccess=(msg:string)=>{
     })
 }
 
+export const alertinfo=(msg:string)=>{
+    ElMessage({
+        message: msg,
+        type: 'info',
+    })
+}
+
 export const alertwarning=(msg:string)=>{
     ElMessage({
         message: msg,

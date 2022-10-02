@@ -34,7 +34,7 @@
 
 <script lang="ts" setup>
 import {Clockin} from "../serve/api"
-import {alerterror, alertsuccess} from "../alert/alert";
+import {alerterror, alertsuccess,alertinfo} from "../alert/alert";
 import {reactive, ref} from "vue"
 import catuicpc from "../assets/katuicpc.jpg"
 import {Location,} from '@element-plus/icons-vue'
@@ -59,7 +59,9 @@ const myclockin=(value:string)=>{
   isLoading.value=true
   Clockin(value).then((res)=>{
     if (res.data.success){
-      alertsuccess(res.data.message)
+      if (res.data.message.search("签到")!=-1)
+        alertsuccess(res.data.message)
+      else alertinfo(res.data.message)
       rule.value=''
       dialogVisible.value=false
     }else {
@@ -68,6 +70,7 @@ const myclockin=(value:string)=>{
   })
   isLoading.value=false
   dialogVisible.value=false
+  ruleForm.rule=''
 }
 
 const ClockInOut=async (formEl: FormInstance | undefined) => {
