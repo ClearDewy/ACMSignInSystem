@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qingtuan.labelclocksystem.mapper.UserMapper">
+
+    <select id="GetAllUser" resultType="User">
+        SELECT * FROM user
+    </select>
+    <select id="GetUser" parameterType="Integer" resultType="User">
+        SELECT * FROM user WHERE Id=#{Id}
+    </select>
+    <select id="GetId" parameterType="String" resultType="User">
+        SELECT * FROM user WHERE #{rule} IN (StuNum,Name,StuCardNum)
+    </select>
+    <insert id="AddUser" parameterType="User">
+        INSERT INTO user(Name,StuNum,StuCardNum,Grade,Major)
+        VALUES
+            (#{Name},#{StuNum},#{StuCardNum},#{Grade},#{Major})
+    </insert>
+    <delete id="DeleteUser" parameterType="User">
+        DELETE from user WHERE Id=${Id}
+    </delete>
+    <update id="UpdateUser" parameterType="User">
+        UPDATE user SET Name=#{Name},StuNum=#{StuNum},StuCardNum=#{StuCardNum},Grade=#{Grade},Major=#{Major} WhERE Id=#{Id}
+    </update>
+
+    <select id="GetAllUserStatus" resultType="UserStatus">
+        SELECT * FROM userstatus
+    </select>
+
+    <select id="GetUserStatus" parameterType="Integer" resultType="UserStatus">
+        SELECT * FROM userstatus WHERE UserId=#{Id}
+    </select>
+
+    <insert id="AddUserStatus" parameterType="UserStatus">
+        INSERT userstatus(UserId,IsAlive)
+        VALUES
+            (#{UserId},#{IsAlive})
+    </insert>
+
+    <update id="UpdateUserStatus" parameterType="UserStatus">
+        UPDATE userstatus SET
+            <choose>
+                <when test="IsAlive">
+                    StartTime=now(),
+                </when>
+                <otherwise>
+                    StartTime=null,
+                </otherwise>
+            </choose>
+
+            IsAlive=#{IsAlive}
+        WHERE UserId=#{UserId}
+    </update>
+
+    <update id="DownAllUserStatus">
+        update userstatus SET IsAlive=false,StartTime=null
+    </update>
+
+    <insert id="AddRecord" parameterType="Record">
+        INSERT record(UserId,StartTime,EndTime,Time)
+        VALUES
+            (#{UserId},#{StartTime},now(),(UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(#{StartTime}))/3600)
+    </insert>
+    <select id="CountTime" parameterType="TimeCount" resultType="TimeCount">
+        SELECT UserId,Name,StuNum,#{StartDate} AS StartDate,#{EndDate} AS EndDate,SUM(Time) AS Time
+        FROM user,record
+        WHERE UserId=User.Id AND EndTime BETWEEN #{StartDate} AND #{EndDate}
+        <if test="UserId!=null">
+            AND UserId=record.UserId
+        </if>
+        GROUP BY Record.UserId  ORDER BY Time DESC,UserId ;
+    </select>
+
+</mapper>
+
