@@ -94,7 +94,7 @@ document.onkeydown=(e)=>{
       stunum.value=stunum.value.slice(-10)
     }
   }else if (e.key==="Enter"){
-    if (stunum.value.length>=10){//&&route.path!="/userview"
+    if (stunum.value.length>=10){//&&route.path!="/userview"  设置用户信息页面签到
       stunum.value=stunum.value.slice(-10)
       // console.log(stunum.value)
       myclockin(stunum.value)
