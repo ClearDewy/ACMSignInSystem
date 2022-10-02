@@ -25,6 +25,7 @@ public class Service {
     private final static String UpdateUserStatusFail="更新用户状态失败";
     private final static String TimeError="时间格式错误";
     private final static String CountTimeFail="时间统计失败";
+    private final static String UserMissed="暂无此用户";
 
     @Autowired
     private UserMapper userMapper;
@@ -43,7 +44,7 @@ public class Service {
         return userMapper.GetUser(Id).get(0);
     }
 
-    public User GetId(String rule){
+    public User GetId(String rule)throws DataAccessException{
         return userMapper.GetId(rule).get(0);
     }
 
@@ -64,9 +65,8 @@ public class Service {
     }
 
     public JsonResult DeleteUser(User user){
-        Integer success=0;
         try {
-            success=userMapper.DeleteUser(user);
+            userMapper.DeleteUser(user);
         }catch (DataAccessException e){
             return new JsonResult(false,DeleteUserFail,e.getMessage());
         }
@@ -112,10 +112,15 @@ public class Service {
         User user;
         try {
             user=GetId(rule);
+        }catch (DataAccessException e){
+            return new JsonResult(false,UserMissed,e.getMessage());
+        }
+        try {
             userStatus = GetUserStatus(user.getId());
         }catch (DataAccessException e){
             return new JsonResult(false,GetUserStatusFail,e.getMessage());
         }
+
         try {
             if (userStatus.isIsAlive())
                 AddRecord(new Record(userStatus.getUserId(),userStatus.getStartTime()));
