@@ -134,7 +134,7 @@ public class Service {
             return new JsonResult(false,UpdateUserStatusFail,e.getMessage());
         }
         if (userStatus.isIsAlive())return new JsonResult(true,user.getName()+ ClockInSuccess);
-        else return new JsonResult(true,user.getName()+ ClockOutSuccess+'\n'+"时长"+String.format("%.2f", (1.0*(System.currentTimeMillis()-userStatus.getStartTime().getTime())/(60 * 60 * 1000)+8))+"小时");
+        else return new JsonResult(true,user.getName()+ ClockOutSuccess+'\n'+"时长"+String.format("%.2f", 1.0*(System.currentTimeMillis()-userStatus.getStartTime().getTime())/(60 * 60 * 1000))+"小时");
     }
 
     public Integer AddRecord(Record record){
