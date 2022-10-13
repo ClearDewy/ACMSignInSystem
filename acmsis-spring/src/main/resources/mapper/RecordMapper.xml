@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qingtuan.acmsis.mapper.RecordMapper">
+
+    <insert id="AddRecord" parameterType="Record">
+        INSERT
+        record(UserId,StartTime,EndTime,Time)
+        VALUES
+            (
+        #{UserId},
+        #{StartTime},
+        now
+        (
+        ),
+        (
+        UNIX_TIMESTAMP
+        (
+        now
+        (
+        )
+        )
+        -
+        UNIX_TIMESTAMP
+        (
+        #{StartTime}
+        )
+        )/
+        3600
+        )
+    </insert>
+
+    <select id="CountTime" parameterType="TimeCount" resultType="TimeCount">
+        SELECT UserId,Name,StuNum,#{StartDate} AS StartDate,#{EndDate} AS EndDate,SUM(Time) AS Time
+        FROM user,record
+        WHERE UserId=user.Id AND EndTime BETWEEN #{StartDate} AND #{EndDate}
+        <if test="UserId!=null">
+            AND UserId=record.UserId
+        </if>
+        GROUP BY record.UserId ORDER BY Time DESC,UserId ;
+    </select>
+
+</mapper>

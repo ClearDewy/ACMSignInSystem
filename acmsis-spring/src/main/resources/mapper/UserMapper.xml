@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qingtuan.acmsis.mapper.UserMapper">
+    <select id="GetAllUser" resultType="User">
+        SELECT *
+        FROM user
+    </select>
+    <select id="GetUser" parameterType="Integer" resultType="User">
+        SELECT *
+        FROM user
+        WHERE Id = #{Id}
+    </select>
+    <select id="GetId" parameterType="String" resultType="User">
+        SELECT *
+        FROM user
+        WHERE #{rule} IN (StuNum, Name, StuCardNum)
+    </select>
+    <insert id="AddUser" parameterType="User">
+        INSERT INTO user(Name, StuNum, StuCardNum, Grade, Major)
+        VALUES (#{Name}, #{StuNum}, #{StuCardNum}, #{Grade}, #{Major})
+    </insert>
+    <delete id="DeleteUser" parameterType="User">
+        DELETE
+        from user
+        WHERE Id = ${Id}
+    </delete>
+    <update id="UpdateUser" parameterType="User">
+        UPDATE user
+        SET Name=#{Name},
+            StuNum=#{StuNum},
+            StuCardNum=#{StuCardNum},
+            Grade=#{Grade},
+            Major=#{Major}
+        WhERE Id = #{Id}
+    </update>
+</mapper>
+

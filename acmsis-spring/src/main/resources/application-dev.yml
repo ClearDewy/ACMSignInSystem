@@ -1,0 +1,17 @@
+# 服务端口号
+server:
+  port: 8080
+
+spring:
+  datasource: # 数据库配置
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:6603/labelclocksystem?characterEncoding=utf-8&useSSL=false&rewriteBatchedStatements=true&&allowPublicKeyRetrieval=true
+    #url: jdbc:mysql://scmzu-acm.com:6603/labelclocksystem?characterEncoding=utf-8&useSSL=false&rewriteBatchedStatements=true&&allowPublicKeyRetrieval=true
+    username: root
+    password: '040110'
+#&serverTimezone=GMT
+logging:
+  file:
+    path: ./acmsis_backend
+  level:
+    root: info

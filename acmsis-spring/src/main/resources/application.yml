@@ -1,0 +1,13 @@
+spring:
+  jackson: #@ResponseBody时区设置
+    time-zone: GMT+8
+  profiles:
+    active: dev
+
+mybatis:
+  # 指定别名设置的包为所有entity
+  type-aliases-package: com/qingtuan/acmsis/entity
+  #  configuration:
+  #    map-underscore-to-camel-case: true # 驼峰命名规范
+  mapper-locations: # mapper映射文件位置
+    - classpath:mapper/*Mapper.xml

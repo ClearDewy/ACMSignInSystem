@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qingtuan.acmsis.mapper.UserStatusMapper">
+    <select id="GetAllUserStatus" resultType="UserStatus">
+        SELECT Name,StuNum,UserId,IsAlive,StartTime
+        FROM  user,userstatus
+        WHERE UserId=user.Id
+    </select>
+
+    <select id="GetUserStatus" parameterType="Integer" resultType="UserStatus">
+        SELECT *
+        FROM userstatus
+        WHERE UserId = #{Id}
+    </select>
+
+    <insert id="AddUserStatus" parameterType="UserStatus">
+        INSERT
+        userstatus(UserId,IsAlive)
+        VALUES
+            (
+        #{UserId},
+        #{IsAlive}
+        )
+    </insert>
+
+    <update id="UpdateUserStatus" parameterType="UserStatus">
+        UPDATE userstatus SET
+        <choose>
+            <when test="IsAlive">
+                StartTime=now(),
+            </when>
+            <otherwise>
+                StartTime=null,
+            </otherwise>
+        </choose>
+
+        IsAlive=#{IsAlive}
+        WHERE UserId=#{UserId}
+    </update>
+
+    <update id="DownAllUserStatus">
+        update userstatus
+        SET IsAlive= false,
+            StartTime=null
+    </update>
+
+
+</mapper>
+
