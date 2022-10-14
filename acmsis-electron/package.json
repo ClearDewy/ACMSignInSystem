@@ -1,0 +1,29 @@
+{
+  "name": "label-vite",
+  "private": true,
+  "main": "main.js",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "electron:serve": "electron .",
+    "packager": "electron-packager ./ acm签到系统 --win --out ./outputs --icon=src/assets/favicon.ico"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.0.10",
+    "axios": "^0.27.2",
+    "element-plus": "^2.2.17",
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.5"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.23",
+    "@vitejs/plugin-vue": "^3.1.0",
+    "electron": "^21.0.1",
+    "electron-packager": "^16.0.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.1.0",
+    "vue-tsc": "^0.40.4"
+  }
+}
