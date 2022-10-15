@@ -1,4 +1,5 @@
 acmsis_backend/
+mysqlinit.sql
 
 HELP.md
 target/

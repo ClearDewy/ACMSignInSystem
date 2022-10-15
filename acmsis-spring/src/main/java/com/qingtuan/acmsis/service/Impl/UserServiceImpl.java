@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
         try {
             data = userMapper.GetAllUser();
         } catch (DataAccessException e) {
+            log.error("{}--->{}", GetAllUserFail,e.getMessage());
             return new JsonResult<>(false, GetAllUserFail.toString(), e.getMessage());
         }
         return new JsonResult<>(true, null, data);
@@ -54,6 +55,7 @@ public class UserServiceImpl implements UserService {
         try {
             if (userMapper.AddUser(user) == 0) return new JsonResult(false, AddUserFail.toString());
         } catch (DataAccessException e) {
+            log.error("{}--->{}", AddUserFail,e.getMessage());
             return new JsonResult(false, AddUserFail.toString(), e.getMessage());
         }
         UserStatus userStatus;
@@ -61,6 +63,7 @@ public class UserServiceImpl implements UserService {
             userStatus = new UserStatus(GetId(user.getStuCardNum()).getId(), false);
             userStatusMapper.AddUserStatus(userStatus);
         } catch (DataAccessException e) {
+            log.error("{}--->{}", AddUserStatusFail,e.getMessage());
             return new JsonResult(false, AddUserStatusFail.toString(), e.getMessage());
         }
         return new JsonResult(true, null);
@@ -71,6 +74,7 @@ public class UserServiceImpl implements UserService {
         try {
             userMapper.DeleteUser(user);
         } catch (DataAccessException e) {
+            log.error("{}--->{}", DeleteUserFail,e.getMessage());
             return new JsonResult(false, DeleteUserFail.toString(), e.getMessage());
         }
         return new JsonResult(true, null);
@@ -81,6 +85,7 @@ public class UserServiceImpl implements UserService {
         try {
             userMapper.UpdateUser(user);
         } catch (DataAccessException e) {
+            log.error("{}--->{}", UpdateUserFail,e.getMessage());
             return new JsonResult(false, UpdateUserFail.toString(), e.getMessage());
         }
         return new JsonResult(true, null);

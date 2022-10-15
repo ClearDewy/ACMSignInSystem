@@ -2,7 +2,7 @@ spring:
   jackson: #@ResponseBody时区设置
     time-zone: GMT+8
   profiles:
-    active: dev
+    active: pro
 
 mybatis:
   # 指定别名设置的包为所有entity

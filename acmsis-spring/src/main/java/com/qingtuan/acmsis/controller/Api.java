@@ -9,10 +9,9 @@ import com.qingtuan.acmsis.service.UserService;
 import com.qingtuan.acmsis.service.UserStatusService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+
 
 @RestController
 @RequestMapping("/api")
@@ -40,12 +39,12 @@ public class Api {
         return res;
     }
 
-    @PostMapping("/deleteuser")
+    @DeleteMapping("/deleteuser")
     public JsonResult deleteuser(User user) {
         return userService.DeleteUser(user);
     }
 
-    @PostMapping("/updateuser")
+    @PutMapping("/updateuser")
     public JsonResult updateuser(User user) {
         return userService.UpdateUser(user);
     }

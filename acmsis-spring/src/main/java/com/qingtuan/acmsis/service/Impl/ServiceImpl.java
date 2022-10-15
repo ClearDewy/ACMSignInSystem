@@ -9,6 +9,7 @@ import com.qingtuan.acmsis.service.RecordService;
 import com.qingtuan.acmsis.service.Service;
 import com.qingtuan.acmsis.service.UserService;
 import com.qingtuan.acmsis.service.UserStatusService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
@@ -18,7 +19,7 @@ import java.util.List;
 
 import static com.qingtuan.acmsis.constant.ErorrMessage.*;
 
-
+@Slf4j
 @org.springframework.stereotype.Service
 public class ServiceImpl implements Service {
     @Autowired
@@ -36,6 +37,7 @@ public class ServiceImpl implements Service {
         try {
             user = userService.GetId(rule);
         } catch (DataAccessException e) {
+            log.warn("{}--->{}", UserMissed,e.getMessage());
             return new JsonResult(false, UserMissed.toString(), e.getMessage());
         }
         try {
@@ -48,12 +50,14 @@ public class ServiceImpl implements Service {
             if (userStatus.isIsAlive())
                 recordService.AddRecord(new Record(userStatus.getUserId(), userStatus.getStartTime()));
         } catch (DataAccessException e) {
+            log.error("{}--->{}", AddRecordFail,e.getMessage());
             return new JsonResult(false, AddRecordFail.toString(), e.getMessage());
         }
         userStatus.setIsAlive(!userStatus.isIsAlive());
         try {
             if (userStatusMapper.UpdateUserStatus(userStatus) == 0) return new JsonResult(false, UpdateUserStatusFail.toString());
         } catch (DataAccessException e) {
+            log.error("{}--->{}", UpdateUserStatusFail,e.getMessage());
             return new JsonResult(false, UpdateUserStatusFail.toString(), e.getMessage());
         }
         if (userStatus.isIsAlive()) return new JsonResult(true, user.getName() + ClockInSuccess);
