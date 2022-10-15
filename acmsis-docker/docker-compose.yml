@@ -1,0 +1,43 @@
+version: "3"
+services:
+
+  acmsis-sql:
+    image: registry.cn-hangzhou.aliyuncs.com/qingtuan/acmsis:acmsis_sql
+    container_name: acmsis-sql
+    restart: always
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    environment:
+    # 设置时区
+      - TZ=Asia/Shanghai
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWOR:-040110} # root账号的密码
+    ports:
+      - ${MYSQL_PUBLIC_PORT:-3307}:3306
+    networks:
+      acmsis-network:
+        ipv4_address: ${MYSQL_PUBLIC_HOST:-172.18.0.3}
+
+
+  acmsis-backend:
+    image: registry.cn-hangzhou.aliyuncs.com/qingtuan/acmsis:acmsis_backend
+    container_name: acmsis-backend
+    restart: always
+    environment:
+    # 设置时区
+      - TZ=Asia/Shanghai
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWOR:-040110} # root账号的密码
+      - MYSQL_PUBLIC_HOST=${MYSQL_PUBLIC_HOST:-172.18.0.3}
+      - MYSQL_PUBLIC_PORT=3306
+
+    ports:
+      - ${BACKEND_PORT:-1107}:8080
+    networks:
+      acmsis-network:
+        ipv4_address: ${BACKEND_HOST:-172.18.0.2}
+
+networks:
+   acmsis-network:
+     driver: bridge
+     ipam:
+       config:
+         - subnet: ${SUBNET:-172.18.0.0/16}
