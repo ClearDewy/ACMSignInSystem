@@ -8,27 +8,7 @@
         INSERT
         record(UserId,StartTime,EndTime,Time)
         VALUES
-            (
-        #{UserId},
-        #{StartTime},
-        now
-        (
-        ),
-        (
-        UNIX_TIMESTAMP
-        (
-        now
-        (
-        )
-        )
-        -
-        UNIX_TIMESTAMP
-        (
-        #{StartTime}
-        )
-        )/
-        3600
-        )
+            (#{UserId},#{StartTime},now(),(UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(#{StartTime}))/3600)
     </insert>
 
     <select id="CountTime" parameterType="TimeCount" resultType="TimeCount">
