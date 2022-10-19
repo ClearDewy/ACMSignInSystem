@@ -1,12 +1,14 @@
 # ACMSignInSystem
 
-ACM实验室签到系统
+**ACM实验室签到系统**
 
 ## 本项目采用spring boot+MySQL+vite+electron搭建
 
-由于实验室内部使用，未做登录权限验证
+*由于实验室内部使用，未做登录权限验证*
 
-
+|                 Github仓库地址                  |                 Gitee仓库地址                  |
+| :---------------------------------------------: | :--------------------------------------------: |
+| https://github.com/Qingqingtuan/ACMSignInSystem | https://gitee.com/qingqingtuan/ACMSignInSystem |
 
 ## 界面展示
 *使用github图床，图片加载较慢*
