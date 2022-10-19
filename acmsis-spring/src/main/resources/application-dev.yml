@@ -1,7 +1,7 @@
 # 默认以下配置默认会读取环境变量的值
-mysql-public-host: 127.0.0.1
+mysql-public-host: localhost
 mysql-public-port: 6603
-mysql-password: 040110
+mysql-password: "040110"
 
 
 # 服务端口号
