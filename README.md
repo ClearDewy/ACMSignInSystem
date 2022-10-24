@@ -8,27 +8,27 @@
 
 |                 Github仓库地址                  |                 Gitee仓库地址                  |
 | :---------------------------------------------: | :--------------------------------------------: |
-| https://github.com/Qingqingtuan/ACMSignInSystem | https://gitee.com/qingqingtuan/ACMSignInSystem |
+| https://github.com/ClearDewy/ACMSignInSystem | https://gitee.com/ClearDewy/ACMSignInSystem |
 
 ## 界面展示
 *使用github图床，图片加载较慢*
 
 #### 首页
 
-![1](https://raw.githubusercontent.com/Qingqingtuan/TyporaImg/main/img/202210021616904.png)
+![1](https://raw.githubusercontent.com/ClearDewy/TyporaImg/main/img/202210021616904.png)
 
 #### 用户状态*（绿色为在线）*
 
-![2](https://raw.githubusercontent.com/Qingqingtuan/TyporaImg/main/img/202210021618023.png)
+![2](https://raw.githubusercontent.com/ClearDewy/TyporaImg/main/img/202210021618023.png)
 
 #### 时间统计
 
-![3](https://raw.githubusercontent.com/Qingqingtuan/TyporaImg/main/img/202210021619052.png)
+![3](https://raw.githubusercontent.com/ClearDewy/TyporaImg/main/img/202210021619052.png)
 
-![4](https://raw.githubusercontent.com/Qingqingtuan/TyporaImg/main/img/202210021639442.png)
+![4](https://raw.githubusercontent.com/ClearDewy/TyporaImg/main/img/202210021639442.png)
 
 #### 用户管理
 
-![5](https://raw.githubusercontent.com/Qingqingtuan/TyporaImg/main/img/202210021640764.png)
+![5](https://raw.githubusercontent.com/ClearDewy/TyporaImg/main/img/202210021640764.png)
 
-![6](https://raw.githubusercontent.com/Qingqingtuan/TyporaImg/main/img/202210021640838.png)
+![6](https://raw.githubusercontent.com/ClearDewy/TyporaImg/main/img/202210021640838.png)
