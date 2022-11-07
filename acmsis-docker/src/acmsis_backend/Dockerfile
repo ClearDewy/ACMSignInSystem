@@ -1,6 +1,6 @@
 #docker build -t acmsis_backend .
-#docker build -t registry.cn-hangzhou.aliyuncs.com/qingtuan/acmsis:acmsis_backend .
-#docker push registry.cn-hangzhou.aliyuncs.com/qingtuan/acmsis:acmsis_backend .
+#docker build -t registry.cn-hangzhou.aliyuncs.com/cleardewy/acmsis:acmsis_backend .
+#docker push registry.cn-hangzhou.aliyuncs.com/cleardewy/acmsis:acmsis_backend
 FROM openjdk:8
 
 #定义工作目录

@@ -2,7 +2,7 @@ version: "3"
 services:
 
   acmsis-sql:
-    image: registry.cn-hangzhou.aliyuncs.com/qingtuan/acmsis:acmsis_sql
+    image: registry.cn-hangzhou.aliyuncs.com/cleardewy/acmsis:acmsis_sql
     container_name: acmsis-sql
     restart: always
     volumes:
@@ -19,7 +19,7 @@ services:
 
 
   acmsis-backend:
-    image: registry.cn-hangzhou.aliyuncs.com/qingtuan/acmsis:acmsis_backend
+    image: registry.cn-hangzhou.aliyuncs.com/cleardewy/acmsis:acmsis_backend
     container_name: acmsis-backend
     restart: always
     environment:

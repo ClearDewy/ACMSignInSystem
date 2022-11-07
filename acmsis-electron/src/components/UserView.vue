@@ -52,7 +52,9 @@
           <el-option label="软件工程" value="软件工程" />
           <el-option label="网络工程" value="网络工程" />
           <el-option label="人工智能" value="人工智能" />
+          <el-input v-model="ruleForm.major" label="手动输入" placeholder="手动输入"/>
         </el-select>
+
       </el-form-item>
       <el-form-item label="卡号" prop="stuCardNum">
         <el-input v-model="ruleForm.stuCardNum" />

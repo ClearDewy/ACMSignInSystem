@@ -1,6 +1,6 @@
 #docker build -t acmsis_sql .
-#docker build -t registry.cn-hangzhou.aliyuncs.com/qingtuan/acmsis:acmsis_sql .
-#docker push registry.cn-hangzhou.aliyuncs.com/qingtuan/acmsis:acmsis_sql
+#docker build -t registry.cn-hangzhou.aliyuncs.com/cleardewy/acmsis:acmsis_sql .
+#docker push registry.cn-hangzhou.aliyuncs.com/cleardewy/acmsis:acmsis_sql
 FROM mysql:8
 
 ENV TZ=Asia/Shanghai
