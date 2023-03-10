@@ -6,7 +6,7 @@ spring:
 
 mybatis-plus:
   # 指定别名设置的包为所有entity
-  type-aliases-package: com/qingtuan/acmsis/entity
+  type-aliases-package: com/cleardewy/acmsis/entity
   #  configuration:
   #    map-underscore-to-camel-case: true # 驼峰命名规范
   mapper-locations: # mapper映射文件位置
